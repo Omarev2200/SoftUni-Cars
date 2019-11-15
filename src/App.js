@@ -1,22 +1,28 @@
 import React  from 'react';
 import { BrowserRouter as Router,  Switch,  Route,  Link} from "react-router-dom";
-import Navbar from './components/Navbar/Navbar';
-import Footer from './components/Footer/Footer';
-import Home from './components/Home/Home';
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
-import NoMatch from './components/NoMatch';
+import Navbar from './components/nav-bar';
+import Footer from './components/footer';
+import Home from './components/home';
+import Login from './components/login';
+import Register from './components/register/index';
+import NoMatch from './components/no-match';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import data from './data'
 
 
 
 
 
-function App() {
+function App(props) {
+  
   return (
     <Router>
       <Navbar/>
         <Switch>
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/">
+            <Home products={data}/>
+          </Route>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/register" component={Register}/>
           <Route  component={NoMatch}/>
