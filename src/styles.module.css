@@ -189,9 +189,7 @@ main p.guest-message a {
 main p.guest-message a:hover {
   text-decoration: none;
 }
-
 /* Login and register */
-
 form {
   padding-top: 10vh;
   padding-bottom: 17vh;
@@ -298,10 +296,9 @@ label[for="report"], label[for="reimbursable"] {
   ;
   font-size: 20px;
 }
-
 /* Login and register */
 
-/* NoMatch */
+/* Not-found */
 
 .not-found {
   text-align: center;
@@ -312,7 +309,7 @@ label[for="report"], label[for="reimbursable"] {
 img.sad-face {
   display: block;
   margin: 0 auto;
-  margin-top: 5%;
+  margin-top: 0%;
 }
 
-/* NoMatch */
+/* Not-found */

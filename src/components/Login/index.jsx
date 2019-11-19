@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import style from '../../styles.module.css';
+import  './style.css';
 
 
 class Login extends React.Component {
@@ -12,7 +12,7 @@ class Login extends React.Component {
       <main>
 
 
-        <form>
+        <form className='login-form'>
           <h1>Login</h1>
 
 
