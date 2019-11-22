@@ -1,3 +1,7 @@
-.login-form input {
-    margin: 0 auto;
+.register-form input {
+    margin: auto;
+}
+
+form {
+    margin-top: -5%;
 }

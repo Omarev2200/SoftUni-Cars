@@ -1,0 +1,34 @@
+.details-conteiner {
+    background-color: cornsilk;
+    color: black;
+    display: inline-block;
+  
+   width: 30em;
+   margin: auto;
+   display: flex;
+   
+    
+}
+li {
+    list-style-type: none;
+}
+.details-conteiner div {
+    display: inline-block;
+    margin-top: 1em;
+}
+
+.button {
+    padding-left: 50px;
+}
+
+.button-edit {
+    padding-right: 30px;
+    text-align: center;
+    margin-right: 20px;
+}
+span {
+  
+}
+
+
+

@@ -1,8 +1,25 @@
-.conteiner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    display: inline-flex;
+.conteiner-card {
+   display: flex;
+   flex-wrap: wrap;
+   background: rgb(191, 194, 194);
+   
+  
+  }
+  .conteiner-card .card {
+    display: block;
+    flex: 0 0 200%;
+    margin-bottom: 4%;
+    overflow: hidden;
+  }
+  .conteiner-card .card img {
+    position: relative;
+    float: left;
+    width:  300px;
+    height: auto;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+  
   }
   .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -18,11 +35,11 @@
     font-size: 22px;
   }
   
-  .card button {
+  .card button a {
     border: none;
     outline: 0;
     padding: 12px;
-    color: white;
+    color: #fd7e17;
     background-color: #000;
     text-align: center;
     cursor: pointer;

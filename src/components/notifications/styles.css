@@ -1,0 +1,15 @@
+.notifications {
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(236, 129, 129);
+    border-radius: 6px;
+    width: 50%;
+    margin-top: 3%;
+    padding: 0.5%;
+}
+
+.notifications p.notification-message {
+    color: #234465;
+    text-decoration: underline;
+    text-align: center;
+}
