@@ -1,26 +1,42 @@
 import React from 'react';
-import {BrowserRouter as Router,Route,
-  Redirect,Switch} from 'react-router-dom'; 
-
+import * as yup from 'yup';
 
 import './style.css';
 
+let schema = yup.object({
+  email:yup.string().email(),
+
+  username:yup.string('Username shoud be a string')
+  .required('Username is required')
+  .min(4,'Username should be more than 4 chars'),
+
+  password:yup.string('Password shoud be a string')
+  .required('Password is required')
+  .min(6,'Password should be more than 6 chars'),
+
+  repeatPassword:yup.string('Password shoud be a string')
+  .oneOf([yup.ref('password'),null], 'Password dont\'t match')
+  .required('Password is required')
+  .min(6,'Password should be more than 6 chars'),
+})
+
+
 
 class Register extends React.Component {
-
+  
   constructor(props) {
-
+    
     super(props)
-
+    
     this.state = {
       email: "",
-      name: "",
+      username: "",
       password: "",
       repeatPassword: "",
-      registrationErrors: [],
-      user: null,
+      errors: undefined
+      
     };
-
+    
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -34,17 +50,31 @@ class Register extends React.Component {
   }
   
   handleSubmit(event) {
-    console.log(this.props.history)
-    const { email, password, repeatPassword, name } = this.state;
-
+    schema.validate(this.state,{abortEarly: false})
+    .then(()=> {
+      this.setState(
+        { errors: undefined }
+      )
+    })
+    .catch(err => {
+      const errors = err.inner.reduce((acc, { path, message }) => {
+        acc[path] = (acc[path] || []).concat(message);
+        return acc;
+      }, {});
+      this.setState({ errors });
+    }) || Promise.resolve();
+    
+    const { email, password, repeatPassword, username,errors} = this.state;
+    
     const user = {
       email,
-      name,
+      username,
       password,
       repeatPassword
     };
-
-    fetch('http://localhost:8080/auth/signup', {
+    if (!!errors) { return; }
+    
+    fetch('http://localhost:9999/api/user/register', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -53,29 +83,25 @@ class Register extends React.Component {
       body: JSON.stringify(user)
     }
     )
-      .then(res => res.json())
-      .then(data => {
-
-        if (data.errors) {
-          data.errors.forEach(error => {
-            this.setState({
-              registrationErrors: error.msg
-            })
-            console.log(error.msg)
-          })
-        } else {
-          console.log(data)
-          localStorage.setItem('username', data.username);
-          localStorage.setItem('userId', data.userId);
-
+    .then(res => res.json())
+            
+      .then(() => {
           this.props.history.push('/login');
         }
-      })
+      )
 
     event.preventDefault();
   }
-
+  
+  getFirstControlError = name => {
+    const errorState = this.state.errors
+    return errorState && errorState[name] && errorState[name][0];
+  };
   render() {
+    const usernameError = this.getFirstControlError('username');
+    const passwordError = this.getFirstControlError('password');
+    const rePasswordError = this.getFirstControlError('repeatPassword');
+    const emailError = this.getFirstControlError('email');
 
     return (
 
@@ -94,15 +120,17 @@ class Register extends React.Component {
             onChange={this.handleChange}
             required
           />
-          <label htmlFor="name"><b>Name</b></label>
+          {emailError && <div className="error">{emailError}</div>}
+          <label htmlFor="name"><b>Username</b></label>
           <input
             type="text"
-            name="name"
+            name="username"
             placeholder="Enter Name"
             value={this.state.name}
             onChange={this.handleChange}
             required
           />
+          {usernameError && <div className="error">{usernameError}</div>}
 
           <label htmlFor="usernmae">Password</label>
           <input
@@ -114,6 +142,7 @@ class Register extends React.Component {
             onChange={this.handleChange}
             required
           />
+          {passwordError && <div className="error">{passwordError}</div>}
 
           <label htmlFor="repeat-password">Repeat Password</label>
           <input
@@ -125,6 +154,7 @@ class Register extends React.Component {
             onChange={this.handleChange}
             required
           />
+          {rePasswordError && <div className="error">{rePasswordError}</div>}
 
           <button type="submit">Register</button>
         </form>
@@ -132,16 +162,9 @@ class Register extends React.Component {
 
     );
   }
+};
 
-  componentWillMount() {
-    const localUsername = localStorage.getItem('username');
-    if (localUsername) {
-      this.setState({
-        user: localUsername
-      })
-    }
-  }
 
-}
+
 
 export default Register;

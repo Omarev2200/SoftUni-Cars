@@ -1,92 +1,39 @@
 import React from 'react';
+import './style.css';
+import withForm from '../hocs/withForm';
+import userService from '../services/user-service';
 
 
-import  './style.css';
 
 
 class Login extends React.Component {
-  constructor(props) {
 
-    super(props)
+  usernameChangeHandler = this.props.controlChangeHandlerFactory('username');
+  passwordChangeHandler = this.props.controlChangeHandlerFactory('password');
 
-    this.state = {
-      email: "",
-      name: "",
-      password: "",
-      registrationErrors: [],
-      user: null,
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+  submitHandler = () => {
+    const errors = this.props.getFormErrorState();
+    if (!!errors) { return; }
+    const data = this.props.getFormState();
+    this.props.login(this.props.history, data);
   }
 
-
-  handleChange(event) {
-    console.log(event)
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-    
-  }
-
-  handleSubmit(event) {
-    const { email, password} = this.state;
-    
-    const user = {
-      email,
-      password,
-      
-    };
-    
-    fetch('http://localhost:8080/auth/signin', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    }
-    )
-    .then(res => res.json())
-    .then(data => {
-
-      if (data.errors) {
-        data.errors.forEach(error => {
-          this.setState({
-            registrationErrors:error.msg
-          })
-          console.log(error.msg)
-        })
-      }else {
-        console.log(data)
-          localStorage.setItem('Authorization',data.token);
-          localStorage.setItem('userId',data.userId);
-          localStorage.setItem('email',data.email);
-          this.props.history.push('/');
-
-      }
-    })
-    
-    event.preventDefault();
-  }
   render() {
     return (
 
       <main>
 
 
-        <form className='login-form' onSubmit={this.handleSubmit}>
+        <form className='login-form' >
           <h1>Login</h1>
 
 
-          <label htmlFor="email"><b>Email</b></label>
+          <label >Username</label>
           <input 
           type="text" 
-          placeholder="Enter Email" 
-          name="email" 
-          value={this.state.email}
-          onChange={this.handleChange}
+          name="username" 
+          placeholder='*******'
+          onChange={this.usernameChangeHandler}
           ></input>
 
 
@@ -96,11 +43,10 @@ class Login extends React.Component {
           name='password' 
           type="password" 
           placeholder="********"
-          value={this.state.password}
-          onChange={this.handleChange}
+          onChange={this.passwordChangeHandler}
           ></input>
 
-          <button type="submit">Login</button>
+          <button type="button" onClick={this.submitHandler}>Login</button>
         </form>
 
       </main>
@@ -109,14 +55,7 @@ class Login extends React.Component {
 
     )
   }
-  componentWillMount() {
-    const localUsername = localStorage.getItem('Authorization');
-    if (localUsername) {
-      this.setState({
-        user:localUsername
-      })
-    }
-  }
+ 
 };
 
-export default Login;
+export default withForm(Login, { username: '', password: '' });

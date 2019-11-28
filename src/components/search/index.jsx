@@ -9,7 +9,7 @@ function Search () {
 
         <input className="searchInput"type="text" name="" placeholder="Search"/>
         <button className="searchButton" href="#">
-        <i class="fa fa-search"></i>
+        <i className="fa fa-search"></i>
         
         </button>
     </div>

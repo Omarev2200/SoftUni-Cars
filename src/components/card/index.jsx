@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import './styles.css'
 
 function Card (props) {
-  console.log(props)
+  
   const {products} = props;
   const listItems = products.map((car) => 
         

@@ -5,3 +5,8 @@
 form {
     margin-top: -5%;
 }
+
+.register-form .error {
+    color: red;
+font-family: 'Times New Roman', Times, serif;
+}
