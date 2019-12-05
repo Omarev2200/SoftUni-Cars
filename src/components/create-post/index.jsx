@@ -14,7 +14,8 @@ class CreatePost extends React.Component {
             mileage:'',
             year:'',
             description:'',
-            mobile:''
+            contact:'',
+            engine:''
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,7 +31,8 @@ class CreatePost extends React.Component {
     }
 
     handleSubmit(event) {
-        const { model, price, imgUrl, mileage, year, description, mobile } = this.state;
+        event.preventDefault();
+        const { model, price, imgUrl, mileage, year, description, contact, engine } = this.state;
 
         const post = {
             model, 
@@ -39,17 +41,19 @@ class CreatePost extends React.Component {
             mileage, 
             year, 
             description, 
-            mobile
+            contact,
+            engine
         };
-        console.log({...post})
+       console.log(post)
 
-        fetch('http://localhost:8080/feed/post/create', {
+        fetch('http://localhost:9999/api/car/', {
             method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(post)
+            body: JSON.stringify(post),
+            credentials: 'include'
         }
         )
             .then(res => res.json())
@@ -61,88 +65,97 @@ class CreatePost extends React.Component {
                         console.log(error.msg)
                     })
                 } else {
-                    console.log(data)
+                    this.props.history.push('/');
                   
 
                 }
             })
 
-        event.preventDefault();
+        
     }
 
     render() {
         return (
 
-            <form onChange={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
                 <h1>Creait Post</h1>
 
-
+                
                 <label htmlFor="model">Model</label>
                 <input 
-                id="username" 
+                
                 type="text" 
                 name='model'
-                value={this.state.email}
+                value={this.state.model}
                 onChange={this.handleChange}
                 required
                 />
 
                 <label htmlFor="price">Price</label>
                 <input 
-                id="password" 
+                 
                 type="text" 
                 name='price'
-                value={this.state.email}
+                value={this.state.price}
                 onChange={this.handleChange}
                 required
                 />
 
                 <label htmlFor="img">ImgUrl</label>
                 <input 
-                id="username" 
+                
                 type="text" 
                 name="imgUrl"
-                value={this.state.email}
+                value={this.state.imgUrl}
                 onChange={this.handleChange}
                 required
                 />
 
                 <label htmlFor="mileage">Mileage</label>
                 <input 
-                id="password" 
+                 
                 type="text" 
                 name='mileage'
-                value={this.state.email}
+                value={this.state.mileage}
                 onChange={this.handleChange}
                 required
                 />
 
                 <label htmlFor="year">Year</label>
                 <input 
-                id="password"
+                
                 name='year'
                 type="text"
-                value={this.state.email}
+                value={this.state.year}
                 onChange={this.handleChange}
                 required
                  />
 
                 <label htmlFor="description">Description</label>
                 <input 
-                id="username" 
+                 
                 type="text" 
                 name='description'
-                value={this.state.email}
+                value={this.state.description}
                 onChange={this.handleChange}
                 required
                 />
 
-                <label htmlFor="tel">Mobile:</label>
+                <label htmlFor="tel">Contact:</label>
                 <input 
-                id="password" 
+                
                 type="text" 
-                name='mobile'
-                value={this.state.email}
+                name='contact'
+                value={this.state.contact}
+                onChange={this.handleChange}
+                required
+                />
+                <label htmlFor="tel">Engine:</label>
+                <input 
+                
+                type="text" 
+                name='engine'
+                value={this.state.engine}
                 onChange={this.handleChange}
                 required
                 />

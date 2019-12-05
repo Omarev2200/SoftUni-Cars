@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom'
 import Search from '../search'
 import styles from '../../styles.module.css';
+// import {UserConsumer} from '../contexts/user-context'
 
-function Navbar({isLogged}) {
-  
-  return (
+function Navbar ({isLogged}) {
+      
+
+    return (
     <div className={styles["custom-padding"]}>
       <nav>
         <div className={styles.logo}>SoftUni Cars</div>
@@ -15,7 +17,7 @@ function Navbar({isLogged}) {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
           {isLogged && <li><Link to="/create">Create Post</Link></li>}
-          {isLogged && <li><Link to="#">{localStorage.username}</Link></li>}
+          {isLogged && <li><Link to="#">{null}</Link></li>}
           {isLogged && <li><Link to="/logout">Logout</Link></li>}
           {!isLogged &&<li><Link to="/login">Login</Link></li>}
           {!isLogged &&<li><Link to="/register">Register</Link></li>}
@@ -24,6 +26,6 @@ function Navbar({isLogged}) {
       </nav>
     </div>
   );
-}
-
+  }
+  
 export default Navbar;

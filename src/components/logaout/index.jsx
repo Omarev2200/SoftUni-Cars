@@ -1,7 +1,8 @@
 import React from 'react';
 
-function Logout({ logout, history }) {
-  logout(history);
+function Logout() {
+  localStorage.clear();
+  
   return null;
 }
 

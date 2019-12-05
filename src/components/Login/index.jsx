@@ -1,41 +1,77 @@
 import React from 'react';
+// import {UserConsumer } from '../contexts/user-context'
 import './style.css';
-import withForm from '../hocs/withForm';
+
 import userService from '../services/user-service';
 
-
-
-
 class Login extends React.Component {
+    constructor(props) {
+      super(props)
 
-  usernameChangeHandler = this.props.controlChangeHandlerFactory('username');
-  passwordChangeHandler = this.props.controlChangeHandlerFactory('password');
+      this.state= {
+        username:'',
+        password:'',
+        error: null
+      }
+    }
+  handleChange = event => {
+    const isCheckbox = event.target.type === "checkbox";
+    this.setState({
+      [event.target.name]: isCheckbox
+        ? event.target.checked
+        : event.target.value
+    });
+    
+  };
 
-  submitHandler = () => {
-    const errors = this.props.getFormErrorState();
-    if (!!errors) { return; }
-    const data = this.props.getFormState();
-    this.props.login(this.props.history, data);
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const {username, password} = this.state;
+
+    const data = {
+      username,
+      password,
+      user:null
+    }
+
+    userService.login(data).then(data => {
+      
+      localStorage.setItem('username',username)
+      // updateUser({username})
+      
+      this.props.history.push('/'); 
+    
+      
+    })
+    .catch(err =>{
+      this.setState({error: err})
+    })
   }
 
   render() {
+    const {error} = this.state
+    const {isLoggedIn} = this.props
+
+    if (isLoggedIn) {
+      React.render('/')
+      this.props.history.push('/');
+    }
     return (
-
       <main>
-
-
-        <form className='login-form' >
+        <form className='login-form' onSubmit={this.handleSubmit}>
           <h1>Login</h1>
-
-
+           {error?<div style={{ fontSize: 20, color: "red" }}>
+            {error}
+          </div>
+          :null}
           <label >Username</label>
           <input 
           type="text" 
           name="username" 
           placeholder='*******'
-          onChange={this.usernameChangeHandler}
+          value={this.state.username}
+          onChange={this.handleChange}
           ></input>
-
 
           <label htmlFor="usernmae">Password</label>
           <input 
@@ -43,19 +79,20 @@ class Login extends React.Component {
           name='password' 
           type="password" 
           placeholder="********"
-          onChange={this.passwordChangeHandler}
+          value={this.state.password}
+          onChange={this.handleChange}
           ></input>
 
-          <button type="button" onClick={this.submitHandler}>Login</button>
+          <button type="submit">Login</button>
         </form>
 
       </main>
 
-
-
     )
   }
+  
  
 };
 
-export default withForm(Login, { username: '', password: '' });
+
+export default Login;
