@@ -29,7 +29,7 @@ class Card extends React.Component {
                       <div className="car-item wow fadeIn animated">
                           <div className="thumb-content">
                               <div className="car-banner">
-                                  <a href="/details">For Rent</a>
+                                  <a href={`/details/${car._id}`}>For Rent</a>
                               </div>
                               <div className="thumb-inner">
                                   <a href="/details"><img alt=""
@@ -84,7 +84,7 @@ class Card extends React.Component {
   componentDidMount() {
     postService.load().then(posts => {
       this.setState({posts});
-      console.log(posts)
+      
     });
   }
   

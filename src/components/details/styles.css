@@ -26,9 +26,7 @@ li {
     text-align: center;
     margin-right: 20px;
 }
-span {
-  
-}
+
 
 
 .container .row ul.car-info li i {
@@ -52,3 +50,6 @@ span {
 }
 
 
+.img-car {
+    width: 300px;
+}

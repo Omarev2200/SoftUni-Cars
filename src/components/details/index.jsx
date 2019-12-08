@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import service from '../services/post-service'
 import './styles.css';
 
 class Details extends React.Component {
@@ -8,18 +9,33 @@ class Details extends React.Component {
         super(props)
 
         this.state = {
-
+            post: []
         };
     }
 
+    componentDidMount() {
+        const id = this.props.match.params.id;
+        service.load(id).then(post => {
+          this.setState({ post });
+          console.log(post)
+        });
+      }
+
     render() {
+        const {post} = this.state;
+        
+        // if (post === null) {
+        //     return <div>Loding...</div>
+            
+        // }
+        console.log(post)
         return (
             <main>
                 <div className='details-conteiner'>
                     <div>
-                        <span>Mercedes-Benz</span>
+                        <span>{post.model}</span>
                         <br />
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf9U31vCk7Ji3PyRPt6aKSCB_ErMqVUN2NXHo61YaEhxePosOR&s"
+                        <img className='img-car' src={post.imgUrl}
                             alt="Mercedes-Benz" />
                         <br />
                         <br />
@@ -28,34 +44,34 @@ class Details extends React.Component {
                             <button className='button-delite'><Link to="/delete/{{_id}}">Delete</Link></button>
                         </li>
                     </div>
-                    <div class="container">
-                        <div class="row">
-                            <ul class="car-info col-md-6">
-                                <li><i className="far fa-calendar-alt"></i><p>2017</p></li>
-                                <li><i class="fas fa-palette"></i><p>Gray</p></li>
-                                <li><i class="fas fa-dollar-sign"></i><p>€200 000</p></li>
+                    <div className="container">
+                        <div className="row">
+                            <ul className="car-info col-md-6">
+                                <li><i className="far fa-calendar-alt"></i><p>{post.year}</p></li>
+                                <li><i className="fas fa-palette"></i><p>Gray</p></li>
+                                <li><i className="fas fa-dollar-sign"></i><p>€{post.price}</p></li>
                                 
                             </ul>
 
                         </div>
                     </div>
-                    <div class="container">
-                        <div class="row">
-                            <ul class="car-info col-md-6">
+                    <div className="container">
+                        <div className="row">
+                            <ul className="car-info col-md-6">
                                 
-                                <li><i className="fas fa-tachometer-alt"></i><p>240p/h</p></li>
-                                <li><i className="fas fa-road"></i><p>20.000km</p></li>
-                                <li><i className="fas fa-gas-pump"></i><p>Diesel</p></li>
+                                <li><i className="fas fa-tachometer-alt"></i><p>160p/h</p></li>
+                                <li><i className="fas fa-road"></i><p>{post.mileage}km</p></li>
+                                <li><i className="fas fa-gas-pump"></i><p>{post.engine}</p></li>
                             </ul>
 
                         </div>
                     </div>
-                    <div class="container">
-                        <div class="row">
-                            <ul class="car-info col-md-6">
+                    <div className="container">
+                        <div className="row">
+                            <ul className="car-info col-md-6">
                                 
                                 <p id='test'>
-                                    dsdsdsdsdsssssssssssssssfffffffffffffffffffffffffffffffffffffffsssssssssssssssssssssssssssssssssss
+                                    {post.description}
                                 </p>
                             </ul>
 

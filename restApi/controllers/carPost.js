@@ -13,6 +13,16 @@ module.exports = {
       .then((CarPostes) => res.send(CarPostes))
       .catch(next);
   },
+  getOne: (req, res) => {
+    const postId = req.params.id
+    models.CarPost.findById(postId)
+      .then(post => {
+        res.status(200).json(post)
+      }).catch((err) => {
+        console.log(err)
+    
+      })
+  },
 
   post: (req, res, next) => {
     const { model, price, imgUrl, mileage, year, description,contact, engine } = req.body;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
-import Navbar from './components/nav-bar';
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import Navigation from './components/navigation';
 import Footer from './components/footer';
 import Home from './components/home';
 import Login from './components/login';
@@ -11,74 +11,82 @@ import Details from './components/details';
 import NoMatch from './components/no-match';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import userService from '../src/components/services/user-service';
-// import { UserProvider, defoldUserState } from '../src/components/contexts/user-context'
+import Store, { StoreContext } from "./components/Store/Store";
+import { loginSuccess } from "./components/Store/actions";
 import data from './data'
 
 
-function parseCookeis() {
-  return document.cookie.split('; ').reduce((acc, cookie) => {
-    const [cookieName, cookieValue] = cookie.split('=');
-    acc[cookieName] = cookieValue;
-    return acc;
-  }, {})
-}
+// function parseCookeis() {
+//   return document.cookie.split('; ').reduce((acc, cookie) => {
+//     const [cookieName, cookieValue] = cookie.split('=');
+//     acc[cookieName] = cookieValue;
+//     return acc;
+//   }, {})
+// }
 
-
-
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    const cookies = parseCookeis();
-    const isLogged = !!cookies['x-auth-token'];
-
-    this.state = {
-      isLogged,
-      // user: {
-      //   ...defoldUserState,
-      //   updateUser: this.updateUser
-      // }
-    }
-  }
-
-    logout = (history) => {
-      userService.logout().then(() => {
-        this.setState({ isLogged: false });
-
-        history.push('/');
-        return null;
+const Auth = ({ children }) => {
+  const { dispatch } = React.useContext(StoreContext);
+  React.useEffect(() => {
+    fetch("http://localhost:9999/auth", { credentials: "include" })
+      .then(res =>
+        res.status === 200
+          ? res.json()
+          : res.text().then(text => Promise.reject(text))
+      )
+      .then(user => dispatch(loginSuccess(user)))
+      .catch(() => {
+        
+        dispatch(loginSuccess(null));
       });
-    }
-    // updateUser = (user) => {
-    //   this.setState({ user });
-    // }
+  }, []);
 
-    render() {
-      const { isLogged } = this.state;
+  return <>{children}</>;
+};
 
-      return (
-        <Router>
-          
-            <Navbar isLogged={isLogged} />
-          
+const App =() => {
+  return (
+    <BrowserRouter>
+    <Store>
+      <Auth>
+        <StoreContext.Consumer>
+          {
+            ({state})=>{
+            
+              const { user } = state;
+              const isLogged = !!state.user;
 
-          <Switch>
-            <Route exact path="/">
-              <Home products={data} />
-            </Route>
-            <Route exact path="/login" component={Login} isLogged={isLogged} />
-            <Route path="/logout" component={Logout}/>
-            <Route path="/details" component={Details} />
-            <Route path="/register" component={Register} />
-            <Route path="/create" component={CreatePost} />
-            <Route component={NoMatch} />
-          </Switch>
-          <Footer />
-          
-        </Router>
+              return user === undefined ? (
+                <div>Loding...</div>
+              ) :(
+                
+            <React.Fragment>
+              <Navigation isLogged={isLogged} user={user} />
+              <Switch>
+                  <Route exact path="/">
+                    <Home products={data} />
+                  </Route>
+                  <Route exact path="/login" component={Login} isLogged={isLogged} />
+                  <Route path="/logout" component={Logout}/>
+                  <Route path="/details/:id" component={Details} />
+                  <Route path="/register" component={Register} />
+                  <Route path="/create" component={CreatePost} />
+                  <Route component={NoMatch} />
+              </Switch>
+              <Footer />  
+            </React.Fragment>                      
+              )
+            }
+          }
+        </StoreContext.Consumer>
+      </Auth>
+    </Store>
+    
+    </BrowserRouter>
+        
 
 
       );
-    }
+    
 
   }
 

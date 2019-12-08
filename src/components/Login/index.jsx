@@ -1,5 +1,6 @@
 import React from 'react';
-// import {UserConsumer } from '../contexts/user-context'
+// import { StoreContext } from '../Store/Store';
+// import { login } from '../Store/actions';
 import './style.css';
 
 import userService from '../services/user-service';
@@ -25,21 +26,21 @@ class Login extends React.Component {
   };
 
   handleSubmit = (e) => {
+    // const { state, dispatch } = React.useContext(StoreContext);
     e.preventDefault();
     const {username, password} = this.state;
 
     const data = {
       username,
       password,
-      user:null
+      
     }
 
     userService.login(data).then(data => {
       
-      localStorage.setItem('username',username)
-      // updateUser({username})
-      
-      this.props.history.push('/'); 
+      // dispatch(login(data));
+      // 
+      window.location.href = '/' 
     
       
     })

@@ -4,6 +4,8 @@ const { auth } = require('../utils');
 
 router.get('/', controllers.carPost.get);
 
+router.get('/:id', controllers.carPost.getOne);
+
 router.post('/', auth(), controllers.carPost.post);
 
 router.put('/:id', auth(), controllers.carPost.put);

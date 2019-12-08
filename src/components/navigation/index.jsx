@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom'
 import Search from '../search'
 import styles from '../../styles.module.css';
-// import {UserConsumer} from '../contexts/user-context'
 
-function Navbar ({isLogged}) {
+
+function Navigation ({isLogged, user}) {
       
 
     return (
@@ -17,7 +17,7 @@ function Navbar ({isLogged}) {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
           {isLogged && <li><Link to="/create">Create Post</Link></li>}
-          {isLogged && <li><Link to="#">{null}</Link></li>}
+          {isLogged && <li><Link to="#">{user && user.username}</Link></li>}
           {isLogged && <li><Link to="/logout">Logout</Link></li>}
           {!isLogged &&<li><Link to="/login">Login</Link></li>}
           {!isLogged &&<li><Link to="/register">Register</Link></li>}
@@ -28,4 +28,4 @@ function Navbar ({isLogged}) {
   );
   }
   
-export default Navbar;
+export default Navigation;
