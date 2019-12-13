@@ -37,6 +37,14 @@ const carPostSchema = new Schema({
         type: String,
         required: true,
     },
+    speed: {
+        type: String,
+        required: true,
+    },
+    color: {
+        type: String,
+        required: true,
+    },
 
     author: {
         type: ObjectId,
@@ -45,4 +53,4 @@ const carPostSchema = new Schema({
 
 });
 
-module.exports = new Model('CarPost', carPostSchema);
+module.exports = new Model('AdCars', carPostSchema);

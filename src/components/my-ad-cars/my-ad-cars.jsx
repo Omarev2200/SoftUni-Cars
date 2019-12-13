@@ -1,24 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import postService from '../services/post-service'
+import service from '../services/post-service'
 
-import './styles.css'
+class MyAdCars extends React.Component{
+    constructor(props) {
+        super(props)
 
-class Card extends React.Component {
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      posts:[]
-
+        this.state = {
+            posts:[]
+      
+          }
     }
-  }
 
-
-  
     render() {
-      const {posts} = this.state;
+        const {posts} = this.state;
+       
+      
       const listPost = posts.map((car) => 
         
   
@@ -32,7 +28,7 @@ class Card extends React.Component {
                                   <a href={`/details/${car._id}`}>For Rent</a>
                               </div>
                               <div className="thumb-inner">
-                                  <a href="/details"><img alt=""
+                                  <a href={`/details/${car._id}`}><img alt=""
                                           src={car.imgUrl}/></a>
                               </div>
                           </div>
@@ -50,7 +46,7 @@ class Card extends React.Component {
                                   </li>
                                   <li>
                                       <div className="item"><i className="fas fa-tachometer-alt"></i>
-                                          <p>160p/h</p>
+                                          <p>{car.speed}p/h</p>
                                       </div>
                                   </li>
                                   <li>
@@ -72,23 +68,27 @@ class Card extends React.Component {
       </div>
 
  )
-      return (
-        <section>
+        return(
+<section>
           <div className="recent-cars">
             {listPost}
           </div>
         </section>
+        )
 
-      )
-  }
-  componentDidMount() {
-    postService.load().then(posts => {
-      this.setState({posts});
-      
-    });
-  }
-  
-
+        
+    }
+    componentDidMount() {
+        const id = this.props.user._id;
+        fetch(`http://localhost:9999/api/car/my-cars/${id}`)
+        .then(res => res.json())
+        .then(posts => {
+          this.setState({posts});
+          console.log(posts);
+          
+        });
+      }
 }
+    
 
-export default Card;
+export default MyAdCars;

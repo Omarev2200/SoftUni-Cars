@@ -15,7 +15,7 @@ module.exports = (app) => {
 
     app.use('/api/user', router.user);
 
-    app.use('/api/car', router.carPost);
+    app.use('/api/car', router.adCars);
 
     app.use('*', (req, res, next) => res.send('<h1> Something went wrong. Try again. :thumbsup: </h1>'))
 };

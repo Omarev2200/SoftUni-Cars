@@ -1,5 +1,7 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
 import './style.css';
+
 
 import userService from '../services/user-service'
 
@@ -67,7 +69,7 @@ class Register extends React.Component {
         password
       }
       userService.register(data).then(() => {
-        this.props.history.push('/login');
+        return <Redirect to="/login" />;
       });
       // clear form
       this.setState(initialState);
@@ -77,7 +79,12 @@ class Register extends React.Component {
 
 
   render() {
+    const {isLogged} = this.props
 
+    if (isLogged) {
+      
+      return <Redirect to="/" />;
+    }
 
     return (<main>
 

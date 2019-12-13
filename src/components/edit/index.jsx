@@ -1,10 +1,9 @@
 import React from 'react';
-import './styles.css';
+import postService from '../services/post-service';
 
-class CreatePost extends React.Component {
+class Edit extends React.Component {
 
     constructor(props) {
-
         super(props)
 
         this.state = {
@@ -16,7 +15,7 @@ class CreatePost extends React.Component {
             description: '',
             contact: '',
             engine: '',
-            speed: '',
+            speed:'',
             color:''
         };
 
@@ -26,6 +25,7 @@ class CreatePost extends React.Component {
 
 
     handleChange(event) {
+
         this.setState({
             [event.target.name]: event.target.value
         });
@@ -34,8 +34,8 @@ class CreatePost extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const { model, price, imgUrl, mileage, year, description, contact, engine, speed, color } = this.state;
-
+        const { model, price, imgUrl, mileage, year, description, contact, engine,speed, color } = this.state;
+        const id = this.props.match.params.id;
         const post = {
             model,
             price,
@@ -50,8 +50,8 @@ class CreatePost extends React.Component {
         };
 
 
-        fetch('http://localhost:9999/api/car/', {
-            method: 'POST',
+        fetch(`http://localhost:9999/api/car/${id}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
@@ -78,11 +78,21 @@ class CreatePost extends React.Component {
 
     }
 
+    componentDidMount() {
+        const id = this.props.match.params.id;
+
+        postService.load(id).then(post => {
+            this.setState({ ...post });
+
+        });
+    }
+
     render() {
+
         return (
 
             <form onSubmit={this.handleSubmit}>
-                <h1>Creait Post</h1>
+                <h1>Edit</h1>
 
 
                 <label htmlFor="model">Model</label>
@@ -164,7 +174,7 @@ class CreatePost extends React.Component {
                     required
                 />
 
-                <label htmlFor="tel">Speed:</label>
+                <label htmlFor="tel">Speed</label>
                 <input
 
                     type="text"
@@ -174,19 +184,20 @@ class CreatePost extends React.Component {
                     required
                 />
 
-                <label htmlFor="tel">Color</label>
-                <input
-
-                    type="text"
-                    name='color'
-                    value={this.state.color}
-                    onChange={this.handleChange}
-                    required
+<label htmlFor="tel">Color</label>
+                <input 
+                
+                type="text" 
+                name='color'
+                value={this.state.color}
+                onChange={this.handleChange}
+                required
                 />
 
-                <button type="submit">Create</button>
+                <button type="submit">Edit</button>
             </form>
         )
     }
 };
-export default CreatePost;
+
+export default Edit;

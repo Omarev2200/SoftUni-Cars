@@ -1,18 +1,31 @@
 import React  from 'react';
-import Card from '../card'
+import CarCard from '../car-card'
+import SearchResult from '../search/search-result'
 
 import './styles.css'
 
 
 
 
-function Home(props) {
-        const products = props.products;
-            
-  return (   
+class Home extends React.Component {
+       constructor(props) {
+         super(props)
 
-       <Card products={products} />
+       }
+       render() {
+        const searchInput = this.props.location.search !== '' ? this.props.location.search.split('=')[1].replace('+', ' ') : null;
+        // console.log(searchInput);
+        
+       return (   
+        <React.Fragment>
+          <SearchResult  query={searchInput}/>
+          <CarCard />
+
+        </React.Fragment>
+        
   );
+     }       
+  
 }
 
 export default Home;

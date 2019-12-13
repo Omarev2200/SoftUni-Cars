@@ -1,20 +1,40 @@
-import React from 'react';
-
-
+import React ,{useState, useEffect} from 'react';
 import './styles.css';
 
-function Search () {
-    return(
-    <div className="searchBox">
 
-        <input className="searchInput"type="text" name="" placeholder="Search"/>
-        <button className="searchButton" href="#">
-        <i className="fa fa-search"></i>
-        
-        </button>
-    </div>
-    )
+class Search extends React.Component {
+   
+    render() {       
+     return(
+            <React.Fragment>
+                <form className="searchBox">
+                
+                <input 
+                className="searchInput"
+                type="text" 
+                name="searchInput" 
+                placeholder="Search"
+                
+                />
+                <button 
+                type='submit'
+                className="searchButton" 
+                href="/search">
+                <i className="fa fa-search"></i>
+                </button>
+            </form>
+            {/* {result.length>0 && (<CarCard posts={result}/>)
+
+            } */}
+            </React.Fragment>
+            
+            
+            )
+    }
+
+
+    
         
     
-}
+};
 export default Search;

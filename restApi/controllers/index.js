@@ -1,7 +1,7 @@
 const user = require('./user');
-const carPost = require('./carPost');
+const adCars = require('./adCars');
 
 module.exports = {
   user,
-  carPost
+  adCars
 };

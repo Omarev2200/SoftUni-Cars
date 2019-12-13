@@ -15,20 +15,24 @@ class Details extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
+        
+        
         service.load(id).then(post => {
           this.setState({ post });
-          console.log(post)
+          
         });
       }
 
     render() {
         const {post} = this.state;
+        const {user}=this.props;
         
-        // if (post === null) {
-        //     return <div>Loding...</div>
+        
+        if (post.length === 0) {
+            return <div>Loding...</div>
             
-        // }
-        console.log(post)
+        }
+       
         return (
             <main>
                 <div className='details-conteiner'>
@@ -40,8 +44,13 @@ class Details extends React.Component {
                         <br />
                         <br />
                         <li className='button'>
-                            <button className='button-edit'><Link to="/edit/{{_id}}">Edit</Link></button>
-                            <button className='button-delite'><Link to="/delete/{{_id}}">Delete</Link></button>
+                            {user.posts.includes(post._id) && (
+                                <div>
+                                    <button className='button-edit'><Link to={`/edit/${post._id}`}>Edit</Link></button>
+                                <button className='button-delite'><Link to={`/delete/${post._id}`}>Delete</Link></button>
+                                </div>
+                            )}
+                            
                         </li>
                     </div>
                     <div className="container">
@@ -59,7 +68,7 @@ class Details extends React.Component {
                         <div className="row">
                             <ul className="car-info col-md-6">
                                 
-                                <li><i className="fas fa-tachometer-alt"></i><p>160p/h</p></li>
+                                <li><i className="fas fa-tachometer-alt"></i><p>{post.speed}p/h</p></li>
                                 <li><i className="fas fa-road"></i><p>{post.mileage}km</p></li>
                                 <li><i className="fas fa-gas-pump"></i><p>{post.engine}</p></li>
                             </ul>

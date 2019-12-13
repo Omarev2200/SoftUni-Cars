@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
 // import { StoreContext } from '../Store/Store';
 // import { login } from '../Store/actions';
 import './style.css';
@@ -37,25 +38,36 @@ class Login extends React.Component {
     }
 
     userService.login(data).then(data => {
+      console.log(data);
       
+      if (data === 'Invalid username or password') {
+        this.setState({error: data})
+        return;
+    } else {
+        
+     
+  window.location.href = '/'
+    }
       // dispatch(login(data));
       // 
-      window.location.href = '/' 
+      
     
       
     })
     .catch(err =>{
+      
+      
       this.setState({error: err})
     })
   }
 
   render() {
     const {error} = this.state
-    const {isLoggedIn} = this.props
+    const {isLogged} = this.props
 
-    if (isLoggedIn) {
-      React.render('/')
-      this.props.history.push('/');
+    if (isLogged) {
+      
+      return <Redirect to="/" />;
     }
     return (
       <main>

@@ -1,10 +1,9 @@
 import React from 'react';
-import './styles.css';
+import postService from '../services/post-service';
 
-class CreatePost extends React.Component {
+class Delete extends React.Component {
 
     constructor(props) {
-
         super(props)
 
         this.state = {
@@ -16,7 +15,7 @@ class CreatePost extends React.Component {
             description: '',
             contact: '',
             engine: '',
-            speed: '',
+            speed:'',
             color:''
         };
 
@@ -26,6 +25,7 @@ class CreatePost extends React.Component {
 
 
     handleChange(event) {
+
         this.setState({
             [event.target.name]: event.target.value
         });
@@ -35,7 +35,7 @@ class CreatePost extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         const { model, price, imgUrl, mileage, year, description, contact, engine, speed, color } = this.state;
-
+        const id = this.props.match.params.id;
         const post = {
             model,
             price,
@@ -50,8 +50,8 @@ class CreatePost extends React.Component {
         };
 
 
-        fetch('http://localhost:9999/api/car/', {
-            method: 'POST',
+        fetch(`http://localhost:9999/api/car/${id}`, {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
@@ -61,28 +61,28 @@ class CreatePost extends React.Component {
         }
         )
             .then(res => res.json())
-            .then(data => {
-
-                if (data.errors) {
-                    data.errors.forEach(error => {
-
-                        console.log(error.msg)
-                    })
-                } else {
-                    this.props.history.push('/');
-
-
-                }
+            .then(() => {
+                this.props.history.push('/');
             })
 
 
     }
 
+    componentDidMount() {
+        const id = this.props.match.params.id;
+
+        postService.load(id).then(post => {
+            this.setState({ ...post });
+
+        });
+    }
+
     render() {
+
         return (
 
             <form onSubmit={this.handleSubmit}>
-                <h1>Creait Post</h1>
+                <h1>Delete</h1>
 
 
                 <label htmlFor="model">Model</label>
@@ -184,9 +184,10 @@ class CreatePost extends React.Component {
                     required
                 />
 
-                <button type="submit">Create</button>
+                <button type="submit">Delete</button>
             </form>
         )
     }
 };
-export default CreatePost;
+
+export default Delete;
