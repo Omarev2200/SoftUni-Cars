@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
 import './styles.css';
 
 class CreatePost extends React.Component {
@@ -79,6 +80,10 @@ class CreatePost extends React.Component {
     }
 
     render() {
+        const {isLogged} = this.props;
+        console.log(isLogged);
+        
+        
         return (
 
             <form onSubmit={this.handleSubmit}>

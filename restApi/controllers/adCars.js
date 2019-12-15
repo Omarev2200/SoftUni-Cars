@@ -55,7 +55,7 @@ getAllMyAdCars: (req, res, next) => {
   put: (req, res, next) => {
     const id = req.params.id;
     const { model, price, imgUrl, mileage, year, description,contact, engine, speed, color } = req.body;
-    models.AdCars.updateOne({ _id: id , model, price, imgUrl, mileage, year, description,contact, engine, speed, color})
+    models.AdCars.updateOne({ _id: id }, {model, price, imgUrl, mileage, year, description,contact, engine, speed, color})
       .then((updatedAdCars) => res.send(updatedAdCars))
       .catch(next)
   },

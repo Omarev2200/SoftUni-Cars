@@ -11,7 +11,7 @@ import MyAdCars from './components/my-ad-cars/my-ad-cars';
 import Details from './components/details';
 import Edit from './components/edit'
 import Delete from './components/delete/delete'
-import SearchResult from './components/search/search-result'
+// import SearchResult from './components/search/search-result'
 import NoMatch from './components/no-match';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Store, { StoreContext } from "./components/Store/Store";
@@ -75,7 +75,7 @@ const App =() => {
 
                   
                   {isLogged &&(
-                    <Route exact path="/create" component={CreatePost} />    
+                    <Route exact path="/create" render={(props) =>(<CreatePost {...props} isLogged={isLogged}/>)} />    
                   )}
                   {isLogged &&(
                     <Route exact path="/my-ad-cars/:id" render={(props) =>(<MyAdCars {...props}user={user}/>)} />    

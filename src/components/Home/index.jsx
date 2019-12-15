@@ -8,10 +8,7 @@ import './styles.css'
 
 
 class Home extends React.Component {
-       constructor(props) {
-         super(props)
-
-       }
+       
        render() {
         const searchInput = this.props.location.search !== '' ? this.props.location.search.split('=')[1].replace('+', ' ') : null;
         // console.log(searchInput);
