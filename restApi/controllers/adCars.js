@@ -14,7 +14,7 @@ module.exports = {
       .catch(next);
   },
   
-getAll: (req, res, next) => {
+getAllMyAdCars: (req, res, next) => {
     
   console.log(req.params.id)
     

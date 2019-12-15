@@ -69,7 +69,7 @@ class Register extends React.Component {
         password
       }
       userService.register(data).then(() => {
-        return <Redirect to="/login" />;
+        window.location.href = '/login'
       });
       // clear form
       this.setState(initialState);

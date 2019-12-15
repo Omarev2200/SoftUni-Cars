@@ -19,6 +19,8 @@ class CarCard extends React.Component {
   
     render() {
       const {posts} = this.state;
+    //  console.log(posts);
+     
      
       
       const listPost = posts.map((car) => 
@@ -75,10 +77,15 @@ class CarCard extends React.Component {
 
  )
       return (
+        
         <section>
-          <div className="recent-cars">
+          {posts.length === 0? 
+          <div>
+            <h1>There are no published advertisement</h1>
+          </div>:<div className="recent-cars">
             {listPost}
-          </div>
+          </div>}
+          
         </section>
 
       )

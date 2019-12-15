@@ -28,6 +28,7 @@ class Details extends React.Component {
         const {user}=this.props;
         
         
+        
         if (post.length === 0) {
             return <div>Loding...</div>
             
@@ -44,7 +45,7 @@ class Details extends React.Component {
                         <br />
                         <br />
                         <li className='button'>
-                            {user.posts.includes(post._id) && (
+                            {user ===null || user.posts.includes(post._id)  && (
                                 <div>
                                     <button className='button-edit'><Link to={`/edit/${post._id}`}>Edit</Link></button>
                                 <button className='button-delite'><Link to={`/delete/${post._id}`}>Delete</Link></button>
@@ -57,7 +58,7 @@ class Details extends React.Component {
                         <div className="row">
                             <ul className="car-info col-md-6">
                                 <li><i className="far fa-calendar-alt"></i><p>{post.year}</p></li>
-                                <li><i className="fas fa-palette"></i><p>Gray</p></li>
+                                <li><i className="fas fa-palette"></i><p>{post.color}</p></li>
                                 <li><i className="fas fa-dollar-sign"></i><p>€{post.price}</p></li>
                                 
                             </ul>

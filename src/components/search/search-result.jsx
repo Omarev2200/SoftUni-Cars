@@ -17,14 +17,16 @@ class SearchResult extends React.Component {
         
             
         const {query} = this.props
-        console.log(query)
+        console.log(query);
+        
+        
         fetch(`http://localhost:9999/api/car/search?q=${query}`)
             .then(res => res.json())
             .then(data => {
                 this.setState({
                     articles:data.articles
                 })
-                 console.log(this.state.articles)
+                
 
                 
           
@@ -34,6 +36,7 @@ class SearchResult extends React.Component {
     render() {
         
         const {articles} = this.state;
+        console.log(articles);
         
       
       const listPost = articles.map((car) => 

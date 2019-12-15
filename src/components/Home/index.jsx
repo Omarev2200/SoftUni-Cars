@@ -18,8 +18,10 @@ class Home extends React.Component {
         
        return (   
         <React.Fragment>
-          <SearchResult  query={searchInput}/>
-          <CarCard />
+          {searchInput && <SearchResult  query={searchInput}/>}
+          {!searchInput &&  <CarCard />}
+          
+         
 
         </React.Fragment>
         

@@ -69,10 +69,11 @@ const App =() => {
                   
                   <Route exact path="/login" render={(props) =>(<Login {...props} isLogged={isLogged}/>)} />
                   <Route exact path="/logout" component={Logout}/>
-                  <Route exact path="/search" component={SearchResult}/>
+                  {/* <Route exact path="/search" component={SearchResult}/> */}
                   <Route exact path="/details/:id" render={(props) =>(<Details {...props} isLogged={isLogged} user={user}/>)} />
-                  <Route exact path="/register" render={() =>(<Register isLogged={isLogged}/>)} />
+                  <Route exact path="/register" render={(props) =>(<Register  {...props} isLogged={isLogged}/>)} />
 
+                  
                   {isLogged &&(
                     <Route exact path="/create" component={CreatePost} />    
                   )}

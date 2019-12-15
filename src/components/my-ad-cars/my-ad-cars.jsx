@@ -69,10 +69,14 @@ class MyAdCars extends React.Component{
 
  )
         return(
-<section>
-          <div className="recent-cars">
+        <section>
+            {posts.length === 0? 
+          <div>
+            <h1>There are no published advertisement</h1>
+          </div>:<div className="recent-cars">
             {listPost}
-          </div>
+          </div>}
+          
         </section>
         )
 
@@ -84,7 +88,7 @@ class MyAdCars extends React.Component{
         .then(res => res.json())
         .then(posts => {
           this.setState({posts});
-          console.log(posts);
+        //   console.log(posts);
           
         });
       }

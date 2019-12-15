@@ -4,7 +4,7 @@ const { auth } = require('../utils');
 
 router.get('/', controllers.adCars.get);
 
-router.get('/my-cars/:id', controllers.adCars.getAll);
+router.get('/my-cars/:id', controllers.adCars.getAllMyAdCars);
 
 router.get('/search', controllers.adCars.search);
 

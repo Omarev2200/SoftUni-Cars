@@ -16,7 +16,7 @@ function Navigation ({isLogged, user}) {
 
         <ul className={styles["menu-area"]}>
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
+          
           {isLogged && <li><Link to={`/my-ad-cars/${user._id}`}>My Ad Cars</Link></li>}
           {isLogged && <li><Link to="/create">Create Post</Link></li>}
           {isLogged && <li><Link to="#">{user && user.username}</Link></li>}
