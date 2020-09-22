@@ -1,4 +1,5 @@
 import React from "react";
+import postService from "../../services/post-service";
 
 class MyAdCars extends React.Component {
   constructor(props) {
@@ -81,8 +82,7 @@ class MyAdCars extends React.Component {
   }
   componentDidMount() {
     const id = this.props.user._id;
-    fetch(`http://localhost:9999/api/car/my-cars/${id}`)
-      .then((res) => res.json())
+    postService.myAdCars(id)
       .then((posts) => {
         this.setState({ posts });
         //   console.log(posts);

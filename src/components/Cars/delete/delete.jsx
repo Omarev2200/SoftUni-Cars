@@ -56,19 +56,9 @@ class Delete extends React.Component {
       color,
     };
 
-    fetch(`http://localhost:9999/api/car/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(post),
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then(() => {
-        this.props.history.push("/");
-      });
+    postService.delete(id, post).then(() => {
+      this.props.history.push("/");
+    });
   }
 
   componentDidMount() {

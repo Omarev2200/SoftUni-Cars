@@ -1,4 +1,5 @@
 import React from "react";
+import postService from "../../services/post-service";
 import "./styles.css";
 
 class CreatePost extends React.Component {
@@ -43,7 +44,7 @@ class CreatePost extends React.Component {
       color,
     } = this.state;
 
-    const post = {
+    const data = {
       model,
       price,
       imgUrl,
@@ -56,16 +57,7 @@ class CreatePost extends React.Component {
       color,
     };
 
-    fetch("http://localhost:9999/api/car/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(post),
-      credentials: "include",
-    })
-      .then((res) => res.json())
+    postService.create(data)
       .then((data) => {
         if (data.errors) {
           data.errors.forEach((error) => {

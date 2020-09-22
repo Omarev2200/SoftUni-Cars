@@ -1,4 +1,5 @@
 import React from 'react';
+import postService from '../../services/post-service';
 
 
 class SearchResult extends React.Component {
@@ -20,8 +21,7 @@ class SearchResult extends React.Component {
         console.log(query);
         
         
-        fetch(`http://localhost:9999/api/car/search?q=${query}`)
-            .then(res => res.json())
+        postService.search(query)
             .then(data => {
                 this.setState({
                     articles:data.articles

@@ -56,25 +56,15 @@ class Edit extends React.Component {
       color,
     };
 
-    fetch(`http://localhost:9999/api/car/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(post),
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.errors) {
-          data.errors.forEach((error) => {
-            console.log(error.msg);
-          });
-        } else {
-          this.props.history.push("/");
-        }
-      });
+    postService.edit(id, post).then((data) => {
+      if (data.errors) {
+        data.errors.forEach((error) => {
+          console.log(error.msg);
+        });
+      } else {
+        this.props.history.push("/");
+      }
+    });
   }
 
   componentDidMount() {
