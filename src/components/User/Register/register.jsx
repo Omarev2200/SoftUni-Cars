@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import './style.css';
 
 
-import userService from '../services/user-service'
+import userService from '../../services/user-service'
 
 
 const initialState = {

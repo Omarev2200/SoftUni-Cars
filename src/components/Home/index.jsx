@@ -1,6 +1,6 @@
 import React  from 'react';
-import CarCard from '../car-card'
-import SearchResult from '../search/search-result'
+import CarCard from '../Cars/car-card'
+import SearchResult from '../Core/search/search-result'
 
 import './styles.css'
 

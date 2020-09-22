@@ -1,0 +1,40 @@
+footer {
+    /* position:fixed;
+    left: 0;
+    bottom: 0; */
+    
+    background: #333;
+    color: white;
+    margin-top: 1em;
+    
+
+
+}
+.footer  {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0.5em;
+}
+.footer  a{
+    padding: 0 2em;
+    font-family: 'Grenze', serif;
+}
+footer p {
+    display: block;
+    text-align: center;
+    color: white;
+   
+}
+.footer  a:hover {
+  background: #ffa000;
+  color: #fff;
+}
+.footer a li {
+  font-family: 'Grenze', serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #fff;
+   
+  padding-top: 1px;
+}

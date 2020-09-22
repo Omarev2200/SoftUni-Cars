@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 // import { login } from '../Store/actions';
 import './style.css';
 
-import userService from '../services/user-service';
+import userService from '../../services/user-service';
 
 class Login extends React.Component {
     constructor(props) {
