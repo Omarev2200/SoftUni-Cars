@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navigation from './components/navigation';
-import Footer from './components/footer';
-import Home from './components/home';
-import Login from './components/login';
+import Footer from './components/Footer';
+import Home from './components/Home';
+import Login from './components/Login';
 import Logout from './components/logaout'
-import Register from './components/register/register';
+import Register from './components/Register/register';
 import CreatePost from './components/create-post';
 import MyAdCars from './components/my-ad-cars/my-ad-cars';
 import Details from './components/details';
