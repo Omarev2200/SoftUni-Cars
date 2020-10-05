@@ -1,30 +1,23 @@
-import React  from 'react';
-import CarCard from '../Cars/car-card'
-import SearchResult from '../Core/search/search-result'
+import React from "react";
+import CarCard from "../Cars/car-card";
+import SearchResult from "../Core/search/search-result";
 
-import './styles.css'
-
-
-
+import "./styles.css";
 
 class Home extends React.Component {
-       
-       render() {
-        const searchInput = this.props.location.search !== '' ? this.props.location.search.split('=')[1].replace('+', ' ') : null;
-        // console.log(searchInput);
-        
-       return (   
-        <React.Fragment>
-          {searchInput && <SearchResult  query={searchInput}/>}
-          {!searchInput &&  <CarCard />}
-          
-         
+  render() {
+    const searchInput =
+      this.props.location.search !== ""
+        ? this.props.location.search.split("=")[1].replace("+", " ")
+        : null;
 
-        </React.Fragment>
-        
-  );
-     }       
-  
+    return (
+      <React.Fragment>
+        {searchInput && <SearchResult query={searchInput} />}
+        {!searchInput && <CarCard />}
+      </React.Fragment>
+    );
+  }
 }
 
 export default Home;

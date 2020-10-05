@@ -6,6 +6,7 @@ const postService = {
       }`
     ).then((res) => res.json());
   },
+
   create: function (data) {
     return fetch(`http://localhost:9999/api/car/`, {
       method: "POST",
@@ -16,6 +17,7 @@ const postService = {
       credentials: "include",
     }).then((res) => res.json());
   },
+
   edit: function (id, post) {
     return fetch(`http://localhost:9999/api/car/${id}`, {
       method: "PUT",
@@ -27,6 +29,7 @@ const postService = {
       credentials: "include",
     }).then((res) => res.json());
   },
+  
   delete: function (id, post) {
     return fetch(`http://localhost:9999/api/car/${id}`, {
       method: "DELETE",
@@ -45,10 +48,11 @@ const postService = {
     );
   },
 
-  search: function(query) {
-    return fetch(`http://localhost:9999/api/car/search?q=${query}`)
-    .then(res => res.json())
-  }
+  search: function (query) {
+    return fetch(
+      `http://localhost:9999/api/car/search?q=${query}`
+    ).then((res) => res.json());
+  },
 };
 
 export default postService;

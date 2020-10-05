@@ -60,7 +60,7 @@ class CreatePost extends React.Component {
     postService.create(data)
       .then((data) => {
         if (data.errors) {
-          data.errors.forEach((error) => {
+            data.errors.forEach((error) => {
             console.log(error.msg);
           });
         } else {

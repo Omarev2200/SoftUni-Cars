@@ -85,7 +85,6 @@ class MyAdCars extends React.Component {
     postService.myAdCars(id)
       .then((posts) => {
         this.setState({ posts });
-        //   console.log(posts);
       });
   }
 }

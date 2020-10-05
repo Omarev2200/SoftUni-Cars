@@ -11,9 +11,6 @@ function Footer() {
         <ul className={style.footer}>
             <Link to="/"> <li>Home</li></Link>
             <Link to="/contact"><li>Contact</li></Link>
-            {/* <Link to="#"><li>User</li></Link>
-            <Link to="/login"><li>Login</li></Link>
-            <Link to="/register"><li>Register</li></Link>          */}
         </ul>
         <p>SoftUni - Cars 2019 </p>
     </footer>

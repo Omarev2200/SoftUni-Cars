@@ -2,31 +2,30 @@ const userService = {
   register: function (data) {
     return fetch(`http://localhost:9999/api/user/register`, {
       body: JSON.stringify(data),
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-type': 'application/json'
-      }
-    }).then(res => res.json());
+        "Content-type": "application/json",
+      },
+    }).then((res) => res.json());
   },
 
   login: function (data) {
     return fetch(`http://localhost:9999/api/user/login`, {
       body: JSON.stringify(data),
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-type': 'application/json'
+        "Content-type": "application/json",
       },
-      credentials: 'include'
-    }).then(res => res.status === 200 ? res.json() : res.text());
+      credentials: "include",
+    }).then((res) => (res.status === 200 ? res.json() : res.text()));
   },
 
   logout: function () {
     return fetch(`http://localhost:9999/api/user/logout`, {
-      method: 'POST',
-      credentials: 'include'
-    }).then(res => res.text());
-  }
-
+      method: "POST",
+      credentials: "include",
+    }).then((res) => res.text());
+  },
 };
 
 export default userService;

@@ -1,21 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import style from '../../styles.module.css';
-
-
-
-
+import style from "../../styles.module.css";
 
 function NoMatch() {
   return (
-   
-     <main>
-        <img src='https://cdn3.iconfinder.com/data/icons/pictomisc/100/sadface-512.png' alt="sad-face" className={style['sad-face']}></img>
-		<h1 className={style['not-found']}>404 - Page Not Found</h1>     
+    <main>
+      <img
+        src="https://cdn3.iconfinder.com/data/icons/pictomisc/100/sadface-512.png"
+        alt="sad-face"
+        className={style["sad-face"]}
+      ></img>
+      <h1 className={style["not-found"]}>404 - Page Not Found</h1>
     </main>
-   
-     
-
   );
 }
 

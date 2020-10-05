@@ -7,7 +7,6 @@ function Logout() {
   let history = useHistory();
   const { dispatch } = React.useContext(StoreContext);
   dispatch(logout());
-  // window.location.href = '/'
   history.push("/")
   return null;
 }

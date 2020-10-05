@@ -11,22 +11,14 @@ import MyAdCars from "./components/Cars/my-ad-cars/my-ad-cars";
 import Details from "./components/Cars/details";
 import Edit from "./components/Cars/edit";
 import Delete from "./components/Cars/delete/delete";
-// import SearchResult from './components/search/search-result'
 import NoMatch from "./components/no-match";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Store, { StoreContext } from "./components/Store/Store";
 import { loginSuccess } from "./components/Store/actions";
 
-// function parseCookeis() {
-//   return document.cookie.split('; ').reduce((acc, cookie) => {
-//     const [cookieName, cookieValue] = cookie.split('=');
-//     acc[cookieName] = cookieValue;
-//     return acc;
-//   }, {})
-// }
-
 const Auth = ({ children }) => {
   const { dispatch } = React.useContext(StoreContext);
+
   React.useEffect(() => {
     fetch("http://localhost:9999/auth", { credentials: "include" })
       .then((res) =>
@@ -72,8 +64,9 @@ const App = () => {
                         <Login {...props} isLogged={isLogged} />
                       )}
                     />
+
                     <Route exact path="/logout" component={Logout} />
-                    {/* <Route exact path="/search" component={SearchResult}/> */}
+                    
                     <Route
                       exact
                       path="/details/:id"
@@ -81,6 +74,7 @@ const App = () => {
                         <Details {...props} isLogged={isLogged} user={user} />
                       )}
                     />
+
                     <Route
                       exact
                       path="/register"
@@ -98,6 +92,7 @@ const App = () => {
                         )}
                       />
                     )}
+                    
                     {isLogged && (
                       <Route
                         exact

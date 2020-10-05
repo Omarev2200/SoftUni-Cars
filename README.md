@@ -1,4 +1,5 @@
-SoftUni-Cars-React.js-Project
+### SoftUni-Cars-React-Project
+```
 This project was generated with React
 ```
 npm install

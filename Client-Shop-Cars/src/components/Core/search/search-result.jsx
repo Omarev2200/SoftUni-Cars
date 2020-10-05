@@ -12,36 +12,21 @@ class SearchResult extends React.Component {
         }
     }
 
-   
-
       componentDidMount() {
-        
             
         const {query} = this.props
-        console.log(query);
-        
         
         postService.search(query)
             .then(data => {
                 this.setState({
                     articles:data.articles
-                })
-                
-
-                
-          
+                })                          
         });
     };
 
     render() {
-        
-        const {articles} = this.state;
-        console.log(articles);
-        
-      
+      const {articles} = this.state;     
       const listPost = articles.map((car) => 
-        
-  
       <div className="container" key={car._id}>
           <div className="recent-car-content">
               <div className="row">                      

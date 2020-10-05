@@ -15,7 +15,6 @@ class CarCard extends React.Component {
 
   render() {
     const { posts } = this.state;
-    //  console.log(posts);
 
     const listPost = posts.map((car) => (
       <div className="container" key={car._id}>
