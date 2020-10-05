@@ -8,10 +8,12 @@ The app uses nodemon. To run the web server type in terminal from Server-Shop-Ca
 ```
 nodemon index
 ```
-Run the React app
+### Run the React app
+```
 The app uses React on client side. To run the React app type in terminal from Client-Shop-Cars directory the following:
-
+```
 npm start
+```
 By default, the app is running on:
-
+```
 localhost:3000
